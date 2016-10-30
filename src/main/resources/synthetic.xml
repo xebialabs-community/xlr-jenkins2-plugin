@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+
+    THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS
+    FOR A PARTICULAR PURPOSE. THIS CODE AND INFORMATION ARE NOT SUPPORTED BY XEBIALABS.
+
+-->
+
+<synthetic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.xebialabs.com/deployit/synthetic" xsi:schemaLocation="http://www.xebialabs.com/deployit/synthetic synthetic.xsd">
+
+    <type type="jenkins.JobTrigger" extends="xlrelease.ReleaseTrigger" description="Triggers release when a job in Jenkins is started">
+        <!-- common -->
+        <property name="jobName"  description="Name of the job to monitor; this job must be configured on the Jenkins server. If the job is located in one or more Jenkins folders, add  a 'job' segment between each folder."/>
+
+        <!-- repository -->
+        <property name="server" category="Repository" referenced-type="jenkins.Server" kind="ci" description="Jenkins server to poll"/>
+        <property name="username" category="Repository" default="" required="false" description="Custom username to override global server configuration"/>
+        <property name="password" category="Repository" default="" required="false" password="true" description="Custom password to override global server configuration"/>
+
+        <!-- output variables -->
+        <property name="buildNumber" category="variables" required="false" description="Build number of the triggered job"/>
+        <property name="buildStatus" category="variables" required="false" description="Build status of the triggered job"/>
+    </type>
+</synthetic>

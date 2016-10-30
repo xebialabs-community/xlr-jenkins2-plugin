@@ -1,0 +1,21 @@
+plugins {
+    id "com.github.hierynomus.license" version "0.13.0"
+    id "com.xebialabs.xlr.docker" version "1.2.1"
+}
+
+version='1.0.0'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+
+xlrDocker {
+    compileVersion = 'v5.0.1.11'
+    runVersion = 'v5.0.1.11'
+}
+
+license {
+    header rootProject.file('src/main/license/xebialabs_community.license')
+    strictCheck false
+}

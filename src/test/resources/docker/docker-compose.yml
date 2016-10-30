@@ -1,0 +1,20 @@
+#
+# THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS
+# FOR A PARTICULAR PURPOSE. THIS CODE AND INFORMATION ARE NOT SUPPORTED BY XEBIALABS.
+#
+
+jenkins:
+  image: xebialabs/xl-docker-demo-jenkins:v2.19.1.1
+  ports:
+   - "9080:8080"
+
+xlr:
+  image: xebialabs/xlr_dev_run:v5.0.1.11
+  volumes:
+    - ~/xl-licenses:/license
+    - ./../../../../:/data
+  links:
+   - jenkins
+  ports:
+   - "5516:5516"
