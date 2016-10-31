@@ -20,6 +20,5 @@
 
         <!-- output variables -->
         <property name="buildNumber" category="variables" required="false" description="Build number of the triggered job"/>
-        <property name="buildStatus" category="variables" required="false" description="Build status of the triggered job"/>
     </type>
 </synthetic>
