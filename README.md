@@ -16,9 +16,9 @@ This plugin offers an interface from XL Release to Jenkins 2.x.
 [xlr-jenkins2-plugin-code-climate-url]: https://codeclimate.com/github/xebialabs-community/xlr-jenkins2-plugin
 
 # Usage #
-* Trigger
-  You can configure a trigger by first going to your template and selecting `Triggers`
+* Trigger: You can configure a trigger by first going to your template and selecting `Triggers`
   ![Jenkins Trigger](images/jenkins_trigger.png)
+  
   When selected, you can provide the Jenkins details.
   ![Jenkins Trigger Details](images/jenkins_trigger_details.png)
 * Tile 
