@@ -15,4 +15,4 @@ wget --http-user=admin --http-password=admin --auth-no-challenge \
      --header="Accept: application/json" \
      --header="Content-type: application/json" \
      --post-file=$SCRIPTPATH/data/server-configs.json \
-    http://localhost:5516/repository/cis
+    http://localhost:5516/repository/cis -O /dev/null
