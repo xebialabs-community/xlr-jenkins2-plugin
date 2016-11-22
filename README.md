@@ -26,3 +26,8 @@ This plugin offers an interface from XL Release to Jenkins 2.x.
 # Testing and Development #
 If you want to start this plugin, you could use the following command `./gradlew runDockerCompose`. 
 This will give you 2 containers (Jenkins and XL Release), with the plugin preloaded.
+
+* How to retrieve the admin password for jenkins? 
+
+docker exec -it docker_jenkins_1 cat /var/jenkins_home/secrets/initialAdminPassword
+
