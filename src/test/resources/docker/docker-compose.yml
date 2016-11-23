@@ -5,7 +5,7 @@
 #
 
 jenkins:
-  image: xebialabs/xl-docker-demo-jenkins:v2.19.1.1
+  image: xebialabs/xl-docker-demo-jenkins:v2.19.3
   ports:
    - "9080:8080"
 
