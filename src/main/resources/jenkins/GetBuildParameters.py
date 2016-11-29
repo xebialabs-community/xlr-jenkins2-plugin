@@ -9,15 +9,24 @@ import urllib
 from xlrelease.HttpRequest import HttpRequest
 
 
-def get_latest_build_number(context):
+def get_parameters(context):
     response = request.get(context + 'api/json', contentType='application/json')
+    print 'response %s' % response
     if not response.isSuccessful():
         raise Exception("Failed to check for last build. Server return [%s], with content [%s]" % (response.status, response.response))
-    build_number = json.loads(response.response)["lastBuild"]["number"]
-    return str(build_number)
+
+    decoded = json.loads(response.response)
+    values = decoded['actions'][0]['parameters']
+    data = {}
+    for v in values:
+        if 'value' in v:
+            data[v['name']] = v['value']
+        else:
+            data[v['name']] = 'XXXXXXXX'
+    return data
 
 
-job_context = '/job/' + urllib.quote(jobName) + '/'
+job_context = '/job/' + urllib.quote(jobName) + '/' + buildNumber + '/'
+print "job_context %s" % job_context
 request = HttpRequest(server, username, password)
-buildNumber = get_latest_build_number(job_context)
-triggerState = buildNumber
+jobParameters = get_parameters(job_context)

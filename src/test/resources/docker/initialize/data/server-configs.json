@@ -8,7 +8,7 @@
     "id": "Configuration/Custom/jenkins",
     "type":"jenkins.Server",
     "title":"localhost",
-    "url":"http://jenkins:9080",
+    "url":"http://jenkins:8080",
     "username":"",
     "password":""
   }

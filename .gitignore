@@ -3,4 +3,9 @@
 build
 supervisord.log
 supervisord.pid
+xlr-jenkins2-plugin.iml
+xlr-jenkins2-plugin.ipr
+xlr-jenkins2-plugin.iws
+
+
 

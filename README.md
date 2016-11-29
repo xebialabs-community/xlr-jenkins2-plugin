@@ -21,7 +21,13 @@ This plugin offers an interface from XL Release to Jenkins 2.x.
   
   When selected, you can provide the Jenkins details.
   ![Jenkins Trigger Details](images/jenkins_trigger_details.png)
+
 * Tile 
+
+* Tasks:
+
+** Jenkins.GetBuildParameters tasks allows to fetch the parameters from an executed job.
+ ![Jenkins GetBuildParameters](images/jenkins_get_parameters.png) 
 
 # Testing and Development #
 If you want to start this plugin, you could use the following command `./gradlew runDockerCompose`. 
