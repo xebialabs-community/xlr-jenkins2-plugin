@@ -33,5 +33,7 @@ This will give you 2 containers (Jenkins and XL Release), with the plugin preloa
 
 * How to retrieve the admin password for jenkins? 
 
-docker exec -it docker_jenkins_1 cat /var/jenkins_home/secrets/initialAdminPassword
+`docker exec -it docker_jenkins_1 cat /var/jenkins_home/secrets/initialAdminPassword` 
+
+
 
