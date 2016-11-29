@@ -24,9 +24,7 @@ This plugin offers an interface from XL Release to Jenkins 2.x.
 
 * Tile 
 
-* Tasks:
-
-** Jenkins.GetBuildParameters tasks allows to fetch the parameters from an executed job.
+* Tasks Jenkins.GetBuildParameters tasks allows to fetch the parameters from an executed job.
  ![Jenkins GetBuildParameters](images/jenkins_get_parameters.png) 
 
 # Testing and Development #
