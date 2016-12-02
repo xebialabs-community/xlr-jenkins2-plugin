@@ -10,11 +10,11 @@ jenkins:
    - "9080:8080"
 
 xlr:
-  image: xebialabs/xlr_dev_run:v5.0.1.11
+  image: xebialabs/xlr_dev_run:v6.0.0.1
   volumes:
     - ~/xl-licenses:/license
     - ./../../../../:/data
   links:
    - jenkins
   ports:
-   - "5516:5516"
+   - "15516:5516"
