@@ -5,12 +5,12 @@
 #
 
 jenkins:
-  image: xebialabs/xl-docker-demo-jenkins:v2.19.3
+  image: xebialabs/xl-docker-demo-jenkins:v2.19.4.1
   ports:
    - "9080:8080"
 
 xlr:
-  image: xebialabs/xlr_dev_run:v6.0.0.1
+  image: xebialabs/xlr_dev_run:v6.1.0.1
   volumes:
     - ~/xl-licenses:/license
     - ./../../../../:/data

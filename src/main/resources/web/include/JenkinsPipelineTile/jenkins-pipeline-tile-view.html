@@ -1,0 +1,28 @@
+<!--
+
+    THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS
+    FOR A PARTICULAR PURPOSE. THIS CODE AND INFORMATION ARE NOT SUPPORTED BY XEBIALABS.
+
+-->
+<div data-ng-controller="ispwServices.ISPWTileController as ispwCtrl" class="dashboard-tile">
+
+    <div class="row" data-ng-if="ispwCtrl.counts && ispwCtrl.totalCount > 0">
+        <div class="col-md-7">
+            <div class="highcharts-tile" donut-chart data="ispwCtrl.counts" options="ispwCtrl.chartOptions"></div>
+        </div>
+        <div class="col-md-5">
+            <ul>
+                <li class="row" ng-repeat="status in ['completed', 'failed', 'progress', 'planned', 'skipped']">
+                    <span class="col-sm-1"><span class="circle status-{{status}}" ></span></span>
+                    <span class="col-sm-1">{{ ispwCtrl.counts[status] }}</span>
+                    <span class="col-sm-6 pls status-message">{{ status }}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="no-items-message" data-ng-if="ispwCtrl.totalCount === 0">
+        There are no ISPW tasks in this {{ ispwCtrl.release.status === 'TEMPLATE' ? 'template' : 'release' }}.
+    </div>
+</div>
