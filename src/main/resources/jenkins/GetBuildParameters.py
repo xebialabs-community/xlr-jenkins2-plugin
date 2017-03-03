@@ -11,9 +11,9 @@ from xlrelease.HttpRequest import HttpRequest
 
 def get_parameters(context):
     response = request.get(context + 'api/json', contentType='application/json')
-    print 'response %s' % response
+    print "response %s" % response
     if not response.isSuccessful():
-        raise Exception("Failed to check for last build. Server return [%s], with content [%s]" % (response.status, response.response))
+        raise Exception("Failed to get build parameters. Server return [%s], with content [%s]" % (response.status, response.response))
 
     decoded = json.loads(response.response)
     values = decoded['actions'][0]['parameters']
