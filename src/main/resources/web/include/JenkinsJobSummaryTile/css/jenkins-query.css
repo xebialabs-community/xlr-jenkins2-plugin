@@ -1,0 +1,62 @@
+/**
+ * THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS
+ * FOR A PARTICULAR PURPOSE. THIS CODE AND INFORMATION ARE NOT SUPPORTED BY XEBIALABS.
+ */
+
+.jenkins-query-summary-container {
+  width: 90%;
+  margin: auto;
+}
+
+.jenkins-query-jenkins-logo {
+  max-width: 138px;
+  height: auto;
+}
+
+.jenkins-query-table {
+  width: 100%;
+}
+
+.jenkins-query-right {
+  text-align: right;
+  margin-right: 1em;
+}
+
+.jenkins-query-tile ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.jenkins-query-tile li {
+  margin-top: 4px;
+}
+
+.jenkins-query-tile .legend {
+  margin-top: 40px;
+}
+
+.jenkins-query-tile .counter {
+  text-align: center;
+}
+
+.jenkins-query-tile .grid-container {
+  margin-top: 15px;
+}
+
+.jenkins-query-tile .ui-grid-viewport {
+  overflow-x: hidden !important;
+  overflow-y: scroll;
+}
+
+.jenkins-query-tile .highcharts-two-part-title {
+  line-height: 22px;
+}
+
+.jenkins-query-tile .no-results {
+  margin: 70px 10px;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+}

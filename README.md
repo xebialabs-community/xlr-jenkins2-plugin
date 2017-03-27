@@ -22,7 +22,15 @@ This plugin offers an interface from XL Release to Jenkins 2.x.
   When selected, you can provide the Jenkins details.
   ![Jenkins Trigger Details](images/jenkins_trigger_details.png)
 
-* Tile 
+* Tiles
+    * **Jenkins Job Summary Tile:**
+    This tile can be used to pull a summary of all runs of a jenkins job
+    
+    **Configure Tile**
+    ![Configure tile](images/jenkins_jobsummarytile_configure.png)
+    
+    **Preview Tile**
+    ![Configure tile](images/jenkins_jobsummarytile.png)
 
 * Tasks Jenkins.GetBuildParameters tasks allows to fetch the parameters from an executed job.
  ![Jenkins GetBuildParameters](images/jenkins_get_parameters.png) 
