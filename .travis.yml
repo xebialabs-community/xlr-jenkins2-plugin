@@ -7,7 +7,7 @@ deploy:
   provider: releases
   api_key:
     secure: pF3lUejaLDz4tq7ABeU+vZDpOnqbO59tdksHXCOzHAveMDzwmdojb9KdLGPG/z27PV/dNDELHux1Zxpd0fS28C7M4lkikiwO7DZfRMLlidqHN2QcGae1c8oEnx60MuwsxW4iUrblV4XijAyHpldRhDobV2lG4xY7yjxF/TKwww9W+JxZvc8WjwFTfsGKOA+TvVqILl/hhVhn+5tPke0yYXv1hQQwTeG7soCL0dppfEaIJFZ4PvZE/grh6mnxBPWKXm/iXw56athoRx5+qBMXL+8/x8TRc2HM/9xdr/GGlYsoKqBYmp4hVdEXx+uqGfZgx7xl+WhsHehIEW7E39Y8IyLJfucgSfSkhFR1uEjJbcxqAnwE3u2LQvw+2a1IkxPsADBIsPPAT4oXYbrwaoSmDYEGSv7gTWyUnT4rFF5PvGXhfMtdN5vuaz87hAO1G7h+3+JDeTqfIpQ5eHBRe/H+fbMYq9OaqTEiQDHvJRR/edfOYnL0lswZ8vhKgk/S8aejvXyG48DWr3AtrcyKEwJouNbIovfObbXlv+OsWC0+29vCvHj2F9oEtl2oFyBIMpVGEDgAL/gxJ8FngiVspVcFdc1UgZ9k54uxRlPddQmws/TWLQJhyZbOEQv8AvOrojXoXjuwvCblmK/Qw3nU48FuoXO4j0rW+aNVh/90hRmmzok=
-  file: build/libs/xlr-jenkins2-plugin-1.0.2.jar
+  file: build/libs/xlr-jenkins2-plugin-1.1.0.jar
   skip_cleanup: true
   on:
     all_branches: true
