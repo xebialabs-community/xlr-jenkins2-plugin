@@ -48,6 +48,7 @@
         <property category="input" name="username" required="false" description="Overrides the username used to connect to the server"/>
         <property category="input" name="password" password="true" required="false" description="Overrides the password used to connect to the server"/>
         <property category="input" name="jobName" required="true" description="Name of the Job" />
+        <property name="embedded" kind="boolean" hidden="true" default="true" required="false"/>
     </type>
 
 </synthetic>

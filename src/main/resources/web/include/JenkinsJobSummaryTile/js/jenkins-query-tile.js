@@ -33,9 +33,21 @@
             if (predefinedColors[value]) return predefinedColors[value];
         }
 
+        function tileConfig(){
+            var config;
+            // old style pre 7.0
+            if (tile.properties == null) {
+                config = tile.configurationProperties;
+            } else {
+                // new style since 7.0
+                config = tile.properties;
+            }
+            return config
+        }
+
         function tileConfigurationIsPopulated() {
-            var config = tile.configurationProperties;
-            return !_.isEmpty(config.jenkinsServer);
+            var config = tileConfig();
+            return !_.isEmpty(config.jenkinsServer) && !_.isEmpty(config.jobName);
         }
 
         function getTitle(){
@@ -71,7 +83,7 @@
                 vm.loading = true;
                 JenkinsSummaryService.executeQuery(tile.id, config).then(
                     function (response) {
-                        $scope.xlrTile.title = $scope.xlrTile.title + " : " + tile.configurationProperties.jobName
+                        $scope.xlrTile.title = $scope.xlrTile.title + " : " + tileConfig().jobName;
                         var serviceNowIssueArray = [];
                         var issues = response.data.data;
                         if(issues[0] === "Invalid table name"){
