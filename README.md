@@ -19,7 +19,7 @@ This plugin offers an interface from XL Release to Jenkins 2.x.
 [xlr-jenkins2-plugin-code-climate-url]: https://codeclimate.com/github/xebialabs-community/xlr-jenkins2-plugin
 [xlr-jenkins2-plugin-license-image]: https://img.shields.io/badge/License-MIT-yellow.svg
 [xlr-jenkins2-plugin-license-url]: https://opensource.org/licenses/MIT
-[xlr-jenkins2-plugin-downloads-image]: https://img.shields.io/github/downloads/xebialabs-community/xlr-xldeploy-plugin/total.svg
+[xlr-jenkins2-plugin-downloads-image]: https://img.shields.io/github/downloads/xebialabs-community/xlr-jenkins2-plugin/total.svg
 
 
 # Usage #
