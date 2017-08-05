@@ -8,38 +8,23 @@
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-import com.xhaus.jyson.JysonCodec as json
+import json
+from xlrelease.HttpRequest import HttpRequest
 
 if not jenkinsServer:
     raise Exception("Jenkins server ID must be provided")
-if not username:
-    username = jenkinsServer["username"]
-if not password:
-    password = jenkinsServer["password"]
 
-jenkinsUrl = jenkinsServer['url']
+jenkins_server_api_url = '/job/%s/api/json?pretty=true&depth=2&tree=builds[displayName,result,url]' % (jobName)
+request = HttpRequest(jenkinsServer, username, password)
+response = request.get(jenkins_server_api_url, contentType='application/json')
 
-credentials = CredentialsFallback(jenkinsServer, username, password).getCredentials()
-content = None
-RESPONSE_OK_STATUS = 200
-print "Sending content %s" % content
+if not response.isSuccessful():
+    print "Failed to run query in Jenkins"
+    raise Exception("Failed to get job summary. Server return [%s], with content [%s]" % (response.status, response.response))
 
-jenkinsServerAPIUrl = jenkinsUrl + '/job/%s/api/json?pretty=true&depth=2&tree=builds[displayName,result,url]' % (jobName)
-jenkinsResponse = XLRequest(jenkinsServerAPIUrl, 'GET', content, credentials['username'], credentials['password'], 'application/json').send()
-if jenkinsResponse.status == RESPONSE_OK_STATUS:
-    json_data = json.loads(jenkinsResponse.read())
-    joblist = []
-    for item in json_data['builds']:
-    	data1 = {"number" : item['displayName'], "result" : item['result'], "url" : item['url']}
-        joblist.append(data1)
-    data = joblist
-else:
-    error = json.loads(jenkinsResponse.read())
-    if 'Invalid table' in error['error']['message']:
-        print "Invalid Table Name"
-        data = {"Invalid table name"}
-        jenkinsResponse.errorDump()
-    else:
-        print "Failed to run query in Jenkins"
-        jenkinsResponse.errorDump()
-        sys.exit(1)
+json_data = json.loads(response.response)
+job_list = []
+for item in json_data['builds']:
+    data1 = {"number" : item['displayName'], "result" : item['result'], "url" : item['url']}
+    job_list.append(data1)
+data = job_list

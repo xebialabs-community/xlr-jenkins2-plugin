@@ -84,7 +84,6 @@
                 JenkinsSummaryService.executeQuery(tile.id, config).then(
                     function (response) {
                         $scope.xlrTile.title = $scope.xlrTile.title + " : " + tileConfig().jobName;
-                        var serviceNowIssueArray = [];
                         var issues = response.data.data;
                         if(issues[0] === "Invalid table name"){
                             vm.invalidTableName = true;
