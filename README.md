@@ -2,8 +2,6 @@
 
 This plugin offers an interface from XL Release to Jenkins 2.x. 
 
-# CI status #
-
 [![Build Status][xlr-jenkins2-plugin-travis-image]][xlr-jenkins2-plugin-travis-url]
 [![Codacy Badge][xlr-jenkins2-plugin-codacy-image] ][xlr-jenkins2-plugin-codacy-url]
 [![Code Climate][xlr-jenkins2-plugin-code-climate-image] ][xlr-jenkins2-plugin-code-climate-url]
@@ -22,13 +20,16 @@ This plugin offers an interface from XL Release to Jenkins 2.x.
 [xlr-jenkins2-plugin-downloads-image]: https://img.shields.io/github/downloads/xebialabs-community/xlr-jenkins2-plugin/total.svg
 
 
-# Usage #
-* Trigger: You can configure a trigger by first going to your template and selecting `Triggers`
+## Usage
+* Trigger: You can configure a trigger by first going to your template and selecting `Triggers`. You can use 2 trigger types:
+  * JobTrigger: Polls for a Jenkins Job to finish
+  * FolderTrigger: Polls for any Jenkins job(s) to finish underneath a Jenkins folder
+  
   ![Jenkins Trigger](images/jenkins_trigger.png)
   
   When selected, you can provide the Jenkins details.
   ![Jenkins Trigger Details](images/jenkins_trigger_details.png)
-
+ 
 * Tiles
     * **Jenkins Job Summary Tile:**
     This tile can be used to pull a summary of all runs of a jenkins job
@@ -42,7 +43,7 @@ This plugin offers an interface from XL Release to Jenkins 2.x.
 * Tasks Jenkins.GetBuildParameters tasks allows to fetch the parameters from an executed job.
  ![Jenkins GetBuildParameters](images/jenkins_get_parameters.png) 
 
-# Testing and Development #
+## Testing and Development
 If you want to start this plugin, you could use the following command `./gradlew runDockerCompose`. 
 This will give you 2 containers (Jenkins and XL Release), with the plugin preloaded.
 

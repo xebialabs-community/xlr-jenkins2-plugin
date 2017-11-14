@@ -26,6 +26,26 @@
         <property name="buildNumber" category="variables" required="false" description="Build number of the triggered job"/>
     </type>
 
+    <type type="jenkins.FolderTrigger" extends="xlrelease.ReleaseTrigger" description="Triggers release when a job in a Folder in Jenkins is started">
+        <!-- common -->
+        <property name="folderName" required="true" description="Name of the folder to monitor; this folder must be configured on the Jenkins server."/>
+        <property name="buildStatus" required="true" description="Defines which build status to check for" kind="enum">
+            <enum-values>
+                <value>lastBuild</value>
+                <value>lastSuccessfulBuild</value>
+                <value>lastFailedBuild</value>
+            </enum-values>
+        </property>
+
+        <!-- repository -->
+        <property name="server" category="Repository" referenced-type="jenkins.Server" kind="ci" description="Jenkins server to poll"/>
+        <property name="username" category="Repository" default="" required="false" description="Custom username to override global server configuration"/>
+        <property name="password" category="Repository" default="" required="false" password="true" description="Custom password to override global server configuration"/>
+
+        <!-- output variables -->
+        <property name="jenkinsJobs" category="variables" required="false" description="Jenkins jobs that triggered the release."/>
+    </type>
+
     <type type="jenkins.GetBuildParameters" extends="xlrelease.PythonScript">
         <property name="scriptLocation" default="jenkins/GetBuildParameters.py" hidden="true"/>
         <property name="iconLocation" default="jenkins/jenkins.png" hidden="true"/>
