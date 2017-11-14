@@ -17,11 +17,13 @@ def get_jobs(folder_name):
     response = request.get('job/' + folder_name + '/api/json?depth=2', contentType='application/json')
     if not response.isSuccessful():
         raise Exception("Failed to check for folder. Server return [%s], with content [%s]" % (response.status, response.response))
-    for job in json.loads(response.response)["jobs"]:
-        if "Folder" in job["_class"]:
-            jenkins_cis.extend(get_jobs(folder_name + "/job/" + job["name"]))
-        else:
-            jenkins_cis.append(job)
+    response_json = json.loads(response.response)
+    if "jobs" in response_json:
+        for job in response_json["jobs"]:
+            if "buildable" not in job or not job["buildable"]:
+                jenkins_cis.extend(get_jobs(folder_name + "/job/" + job["name"]))
+            elif job["buildable"]:
+                jenkins_cis.append(job)
     return jenkins_cis
 
 def convert_dict_to_sorted_string(dict_jobs):
