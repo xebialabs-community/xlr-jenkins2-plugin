@@ -20,9 +20,9 @@ def get_parameters(context):
         raise Exception("Failed to get build parameters. Server return [%s], with content [%s]" % (response.status, response.response))
 
     decoded = json.loads(response.response)
-    values = decoded['actions'][0]['parameters']
+    values = [item.get('parameters') for item in decoded['actions'] if item.get('parameters')]
     data = {}
-    for v in values:
+    for v in values[0]:
         if 'value' in v:
             data[v['name']] = v['value']
         else:
