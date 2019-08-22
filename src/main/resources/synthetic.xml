@@ -62,6 +62,7 @@
     </type>
 
     <type type="jenkins.JobSummaryTile" label="Jenkins Job Summary Tile" extends="xlrelease.Tile">
+        <property default="release,folder,global" hidden="true" name="supportedScopes" kind="list_of_string"/>
         <property name="uri" hidden="true" default="include/JenkinsJobSummaryTile/jenkins-job-summary-view.html" />
         <property name="title" description="Tile title" default="Job Summary"/>
         <property category="input" name="jenkinsServer" referenced-type="jenkins.Server" kind="ci" label="Server" description="jenkins server id to connect to"/>
@@ -73,6 +74,7 @@
 
     <type type="jenkins.PipelineStagesTile" label="Jenkins Pipeline Stages Tile" extends="xlrelease.Tile"
     description="Visualize timing information for Jenkins jobs and stages.  This plugin requires installing the Pipeline Stage View Plugin in Jenkins">
+        <property default="release,folder,global" hidden="true" name="supportedScopes" kind="list_of_string"/>
         <property name="uri" hidden="true" default="include/JenkinsPipelineStagesTile/jenkins-pipeline-stages-summary-view.html" />
         <property name="title" description="Tile title" default="Jenkins Pipeline Stages"/>
         <property category="input" name="jenkinsServer" referenced-type="jenkins.Server" kind="ci" label="Server"
