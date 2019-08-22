@@ -47,7 +47,6 @@ else:
 for i in range(len(joblist)):
     buildNum = joblist[i]["number"]
     jenkinsServerAPIUrl = jenkinsUrl + '/job/%s/%s/wfapi/describe' % (jobName, buildNum)
-    print "/job/%s/%s/wfapi/describe" % (jobName, buildNum)
     jenkinsResponse = XLRequest(jenkinsServerAPIUrl, 'GET', content, credentials['username'], credentials['password'], 'application/json').send()
     if jenkinsResponse.status == RESPONSE_OK_STATUS:
         json_data = json.loads(jenkinsResponse.read())
