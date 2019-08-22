@@ -61,7 +61,7 @@
         <property name="jobParameters" category="output" required="false" kind="map_string_string" description="map containing the parameters and the values"/>
     </type>
 
-    <type type="jenkins.JobSummaryTile" label="Jenkins Job Summary tile" extends="xlrelease.Tile">
+    <type type="jenkins.JobSummaryTile" label="Jenkins Job Summary Tile" extends="xlrelease.Tile">
         <property name="uri" hidden="true" default="include/JenkinsJobSummaryTile/jenkins-job-summary-view.html" />
         <property name="title" description="Tile title" default="Job Summary"/>
         <property category="input" name="jenkinsServer" referenced-type="jenkins.Server" kind="ci" label="Server" description="jenkins server id to connect to"/>
@@ -71,4 +71,15 @@
         <property name="embedded" kind="boolean" hidden="true" default="true" required="false"/>
     </type>
 
+    <type type="jenkins.PipelineStagesTile" label="Jenkins Pipeline Stages Tile" extends="xlrelease.Tile"
+    description="Visualize timing information for Jenkins jobs and stages.  This plugin requires installing the Pipeline Stage View Plugin in Jenkins">
+        <property name="uri" hidden="true" default="include/JenkinsPipelineStagesTile/jenkins-pipeline-stages-summary-view.html" />
+        <property name="title" description="Tile title" default="Jenkins Pipeline Stages"/>
+        <property category="input" name="jenkinsServer" referenced-type="jenkins.Server" kind="ci" label="Server"
+        description="Jenkins instance to connect to.  The Pipeline Stage View Plugin must be installed on this Jenkins instance"/>
+        <property category="input" name="username" required="false" description="Overrides the username used to connect to the server"/>
+        <property category="input" name="password" password="true" required="false" description="Overrides the password used to connect to the server"/>
+        <property category="input" name="jobName" required="true" description="Name of the job" />
+        <property category="input" name="maxNumberOfBuilds" kind="integer" required="true" description="Maximum number of recent builds to display" />
+    </type>
 </synthetic>
