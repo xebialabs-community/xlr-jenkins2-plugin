@@ -6,6 +6,9 @@ supervisord.pid
 xlr-jenkins2-plugin.iml
 xlr-jenkins2-plugin.ipr
 xlr-jenkins2-plugin.iws
-
+.classpath
+.project
+.settings/
+bin/
 
 

@@ -9,6 +9,10 @@
 #
 
 import com.xhaus.jyson.JysonCodec as json
+import datetime
+
+def convertMillisEpoch(millis):
+    return datetime.datetime.fromtimestamp(float(millis)/1000).strftime('%Y-%m-%d %H:%M:%S %Z')
 
 if not jenkinsServer:
     raise Exception("Jenkins server ID must be provided")
@@ -25,7 +29,7 @@ RESPONSE_OK_STATUS = 200
 print "Sending content %s" % content
 
 # Compile jobs information for the standard API endpoint
-jenkinsServerAPIUrl = jenkinsUrl + '/job/%s/api/json?pretty=true&depth=2&tree=builds[number,result,url]' % (jobName)
+jenkinsServerAPIUrl = jenkinsUrl + '/job/%s/api/json?pretty=true&depth=2&tree=builds[number,building,result,url]' % (jobName)
 jenkinsResponse = XLRequest(jenkinsServerAPIUrl, 'GET', content, credentials['username'], credentials['password'], 'application/json').send()
 if jenkinsResponse.status == RESPONSE_OK_STATUS:
     json_data = json.loads(jenkinsResponse.read())
@@ -34,8 +38,12 @@ if jenkinsResponse.status == RESPONSE_OK_STATUS:
     for build in json_data['builds']:
         if buildsToProcess <= 0:
             break
+        if build['building']:
+            result = "BUILDING"
+        else:
+            result = build['result']
         joblist.append(
-            {"number" : build['number'], "result" : build['result'], "url" : build['url']}
+            {"number" : build['number'], "result" : result, "url" : build['url']}
         )
         buildsToProcess -= 1
 else:
@@ -60,6 +68,11 @@ for i in range(len(joblist)):
                     "duration": float(stage["durationMillis"])/1000
                 }
             )
+        joblist[i]["startTime"] = convertMillisEpoch(json_data["startTimeMillis"])
+        joblist[i]["endTime"] = convertMillisEpoch(json_data["endTimeMillis"])
+        joblist[i]["duration"] = float(json_data["durationMillis"])/1000
+        joblist[i]["queueDuration"] = float(json_data["queueDurationMillis"])/1000
+        joblist[i]["pauseDuration"] = float(json_data["pauseDurationMillis"])/1000
 
 # Get data in the plot-ready format
 stages_dict = {}
@@ -89,8 +102,25 @@ for stage in stages_list:
         },
     )
 
+# Create rows object for the detailed/table view of the data
+rows = []
+for i in range(len(joblist)):
+    rows.append(
+        {
+            "number": joblist[i]["number"],
+            "result": joblist[i]["result"],
+            "startTime": joblist[i]["startTime"],
+            "endTime": joblist[i]["endTime"],
+            "duration": "%.3f sec" % joblist[i]["duration"],
+            "queueDuration": "%.3f sec" % joblist[i]["queueDuration"],
+            "pauseDuration": "%.3f sec" % joblist[i]["pauseDuration"],
+            "url": joblist[i]["url"]
+        }
+    )
+
 data = {
     "series": series,
     "builds": [job["number"] for job in joblist],
-    "stages": [stage["name"] for stage in stages_list]
+    "stages": [stage["name"] for stage in stages_list],
+    "rows": rows
 }
