@@ -77,6 +77,8 @@
         <property default="release,folder,global" hidden="true" name="supportedScopes" kind="list_of_string"/>
         <property name="uri" hidden="true" default="include/JenkinsPipelineStagesTile/jenkins-pipeline-stages-summary-view.html" />
         <property name="detailsUri" hidden="true" default="include/JenkinsPipelineStagesTile/jenkins-pipeline-stages-details-view.html" />
+        <property name="width" kind="integer" default="2"/>
+        <property name="height" kind="integer" default="2"/>
         <property name="title" description="Tile title" default="Jenkins Pipeline Stages"/>
         <property category="input" name="jenkinsServer" referenced-type="jenkins.Server" kind="ci" label="Server"
         description="Jenkins instance to connect to.  The Pipeline Stage View Plugin must be installed on this Jenkins instance"/>
