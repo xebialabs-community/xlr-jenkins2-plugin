@@ -10,27 +10,47 @@
 
 import json
 import urllib
+import logging
+
 from xlrelease.HttpRequest import HttpRequest
+
+logging.basicConfig(filename='log/plugin.log',
+                            filemode='a',
+                            format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
+                            datefmt='%H:%M:%S',
+                            level=logging.DEBUG)
+
+logging.info("GetBuildParameters: begin")
 
 
 def get_parameters(context):
     response = request.get(context + 'api/json', contentType='application/json')
-    print "response %s" % response
+    logging.debug("response status: %s" % response.status)
+    logging.debug("response decoded: %s" % response.response)
+
     if not response.isSuccessful():
         raise Exception("Failed to get build parameters. Server return [%s], with content [%s]" % (response.status, response.response))
 
     decoded = json.loads(response.response)
     values = [item.get('parameters') for item in decoded['actions'] if item.get('parameters')]
+
     data = {}
-    for v in values[0]:
-        if 'value' in v:
-            data[v['name']] = v['value']
-        else:
-            data[v['name']] = 'XXXXXXXX'
+
+    if len(values) > 0:
+        for v in values[0]:
+            if 'value' in v:
+                data[v['name']] = v['value']
+            else:
+                data[v['name']] = 'XXXXXXXX'
+    else:
+        print("Job has no parameters")
+
     return data
 
-
 job_context = '/job/' + urllib.quote(jobName) + '/' + buildNumber + '/'
-print "job_context %s" % job_context
+logging.info("job_context %s" % job_context)
+
 request = HttpRequest(server, username, password)
 jobParameters = get_parameters(job_context)
+
+logging.info("GetBuildParameters: end")
