@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--
 
-    Copyright 2019 XEBIALABS
+    Copyright 2020 XEBIALABS
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -16,12 +16,10 @@
     <type type="jenkins.JobTrigger" extends="xlrelease.ReleaseTrigger" description="Triggers release when a job in Jenkins is started">
         <!-- common -->
         <property name="jobName" description="Name of the job to monitor; this job must be configured on the Jenkins server. If the job is located in one or more Jenkins folders, add  a 'job' segment between each folder."/>
-
         <!-- repository -->
         <property name="server" category="Repository" referenced-type="jenkins.Server" kind="ci" description="Jenkins server to poll"/>
         <property name="username" category="Repository" default="" required="false" description="Custom username to override global server configuration"/>
         <property name="password" category="Repository" default="" required="false" password="true" description="Custom password to override global server configuration"/>
-
         <!-- output variables -->
         <property name="buildNumber" category="variables" required="false" description="Build number of the triggered job"/>
     </type>
@@ -36,12 +34,10 @@
                 <value>lastFailedBuild</value>
             </enum-values>
         </property>
-
         <!-- repository -->
         <property name="server" category="Repository" referenced-type="jenkins.Server" kind="ci" description="Jenkins server to poll"/>
         <property name="username" category="Repository" default="" required="false" description="Custom username to override global server configuration"/>
         <property name="password" category="Repository" default="" required="false" password="true" description="Custom password to override global server configuration"/>
-
         <!-- output variables -->
         <property name="jenkinsJobs" category="variables" required="false" description="Jenkins jobs that triggered the release."/>
     </type>
@@ -49,16 +45,25 @@
     <type type="jenkins.GetBuildParameters" extends="xlrelease.PythonScript">
         <property name="scriptLocation" default="jenkins/GetBuildParameters.py" hidden="true"/>
         <property name="iconLocation" default="jenkins/jenkins.png" hidden="true"/>
-
         <property name="server" category="input" label="Server" referenced-type="jenkins.Server" kind="ci" description="Jenkins server to connect to"/>
         <property name="username" category="input" required="false" description="Overrides the password used to connect to the server"/>
         <property name="password" password="true" category="input" required="false" description="Overrides the password used to connect to the server"/>
-
         <!-- input variables -->
         <property name="jobName" category="input" description="Name of the job to trigger; this job must be configured on the Jenkins server. If the job is located in one or more Jenkins folders, add  a 'job' segment between each folder."/>
         <property name="buildNumber" category="input" required="true" description="Build number of the triggered job"/>
         <!-- output variables -->
         <property name="jobParameters" category="output" required="false" kind="map_string_string" description="map containing the parameters and the values"/>
+    </type>
+
+    <type type="jenkins.WaitForCompletion" extends="xlrelease.PythonScript">
+        <property name="scriptLocation" default="jenkins/WaitForCompletion.py" hidden="true"/>
+        <property name="iconLocation" default="jenkins/jenkins.png" hidden="true"/>
+        <property name="server" category="input" label="Server" referenced-type="jenkins.Server" kind="ci" description="Jenkins server to connect to"/>
+        <property name="username" category="input" required="false" description="Overrides the password used to connect to the server"/>
+        <property name="password" password="true" category="input" required="false" description="Overrides the password used to connect to the server"/>
+        <!-- input variables -->
+        <property name="jobName" category="input" required="true" description="Name of the job to trigger; this job must be configured on the Jenkins server. If the job is located in one or more Jenkins folders, add  a 'job' segment between each folder."/>
+        <property name="buildNumber" category="input" required="true"/>
     </type>
 
     <type type="jenkins.JobSummaryTile" label="Jenkins Job Summary Tile" extends="xlrelease.Tile">

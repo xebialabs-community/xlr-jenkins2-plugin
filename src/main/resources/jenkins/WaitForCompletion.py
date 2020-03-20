@@ -8,17 +8,33 @@
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-jenkins:
-  image: xebialabs/xl-docker-demo-jenkins:v2.46.3-alpine
-  ports:
-   - "9080:8080"
+import json
+import urllib
 
-xlr:
-  image: xebialabs/xlr_dev_run:v7.2.0.1
-  volumes:
-    - ~/xl-licenses:/license
-    - ./../../../../:/data
-  links:
-   - jenkins
-  ports:
-   - "15516:5516"
+from xlrelease.HttpRequest import HttpRequest
+
+job_context = "/job/" + urllib.quote(jobName) + "/" + buildNumber + "/"
+
+request = HttpRequest(server, username, password)
+response = request.get(job_context + "api/json", contentType="application/json")
+
+if not response.isSuccessful():
+    raise Exception(
+        "Failed to get build information. Server return [%s], with content [%s]"
+        % (response.status, response.response)
+    )
+
+result = json.loads(response.response)["result"]
+
+if result is None:
+    task.setStatusLine("Waiting for build completion...")
+    task.schedule("jenkins/WaitForCompletion.py", 3)
+else:
+    if result != "SUCCESS":
+        raise Exception("[Build %s](%s) was not successful - status is %s" % (
+            buildNumber,
+            json.loads(response.response)["url"],
+            result,
+        ))
+    else:
+        task.setStatusLine("Success")
