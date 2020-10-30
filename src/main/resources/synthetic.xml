@@ -55,6 +55,19 @@
         <property name="jobParameters" category="output" required="false" kind="map_string_string" description="map containing the parameters and the values"/>
     </type>
 
+    <type type="jenkins.GetBuildEnvironmentVariabless" extends="xlrelease.PythonScript">
+        <property name="scriptLocation" default="jenkins/GetBuildEnvironmentVariables.py" hidden="true"/>
+        <property name="iconLocation" default="jenkins/jenkins.png" hidden="true"/>
+        <property name="server" category="input" label="Server" referenced-type="jenkins.Server" kind="ci" description="Jenkins server to connect to"/>
+        <property name="username" category="input" required="false" description="Overrides the password used to connect to the server"/>
+        <property name="password" password="true" category="input" required="false" description="Overrides the password used to connect to the server"/>
+        <!-- input variables -->
+        <property name="jobName" category="input" description="Name of the job to trigger; this job must be configured on the Jenkins server. If the job is located in one or more Jenkins folders, add  a 'job' segment between each folder."/>
+        <property name="buildNumber" category="input" required="true" description="Build number of the triggered job"/>
+        <!-- output variables -->
+        <property name="jobEnvVars" category="output" required="false" kind="map_string_string" description="map containing the environment variables and the values"/>
+    </type>
+
     <type type="jenkins.WaitForCompletion" extends="xlrelease.PythonScript">
         <property name="scriptLocation" default="jenkins/WaitForCompletion.py" hidden="true"/>
         <property name="iconLocation" default="jenkins/jenkins.png" hidden="true"/>

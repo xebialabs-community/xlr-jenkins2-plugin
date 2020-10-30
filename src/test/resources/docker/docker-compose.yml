@@ -8,17 +8,25 @@
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-jenkins:
-  image: xebialabs/xl-docker-demo-jenkins:v2.46.3-alpine
-  ports:
-   - "9080:8080"
+version: "3"
+services:
+  jenkins:
+    build: jenkins
+    #image: jenkins/jenkins:lts
+    ports:
+    - "9080:8080"
 
-xlr:
-  image: xebialabs/xlr_dev_run:v7.2.0.1
-  volumes:
-    - ~/xl-licenses:/license
-    - ./../../../../:/data
-  links:
-   - jenkins
-  ports:
-   - "15516:5516"
+  xlr:
+    image: xebialabs/xl-release:9.7
+    container_name: xlr
+    volumes:
+    #  - ~/xl-licenses/xl-release-license.lic:/opt/xebialabs/xl-release-server/conf/xl-release-license.lic
+      - ./../../../../build/libs/:/opt/xebialabs/xl-release-server/default-plugins/__local__/
+      - ./../../../../build/reports/tests/log/:/opt/xebialabs/xl-release-server/log/
+    links:
+      - jenkins
+    environment:
+      - ADMIN_PASSWORD=admin
+      - ACCEPT_EULA=Y
+    ports:
+      - "15516:5516"

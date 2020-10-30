@@ -10,5 +10,6 @@ xlr-jenkins2-plugin.iws
 .project
 .settings/
 bin/
+.vscode/
 
 

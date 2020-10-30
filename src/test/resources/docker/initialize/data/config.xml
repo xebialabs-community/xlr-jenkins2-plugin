@@ -1,0 +1,32 @@
+<project>
+    <actions/>
+    <description/>
+    <keepDependencies>false</keepDependencies>
+    <properties>
+        <hudson.model.ParametersDefinitionProperty>
+            <parameterDefinitions>
+                <hudson.model.StringParameterDefinition>
+                    <name>myString</name>
+                    <description/>
+                    <defaultValue>someString</defaultValue>
+                    <trim>false</trim>
+                </hudson.model.StringParameterDefinition>
+            </parameterDefinitions>
+        </hudson.model.ParametersDefinitionProperty>
+    </properties>
+    <scm class="hudson.scm.NullSCM"/>
+    <canRoam>true</canRoam>
+    <disabled>false</disabled>
+    <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+    <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+    <triggers/>
+    <concurrentBuild>false</concurrentBuild>
+    <builders>
+        <hudson.tasks.Shell>
+            <command>echo "BUILD_NUMBER" :: $BUILD_NUMBER echo "BUILD_ID" :: $BUILD_ID echo "BUILD_DISPLAY_NAME" :: $BUILD_DISPLAY_NAME echo "JOB_NAME" :: $JOB_NAME echo "JOB_BASE_NAME" :: $JOB_BASE_NAME echo "BUILD_TAG" :: $BUILD_TAG echo "EXECUTOR_NUMBER" :: $EXECUTOR_NUMBER echo "NODE_NAME" :: $NODE_NAME echo "NODE_LABELS" :: $NODE_LABELS echo "WORKSPACE" :: $WORKSPACE echo "JENKINS_HOME" :: $JENKINS_HOME echo "JENKINS_URL" :: $JENKINS_URL echo "BUILD_URL" ::$BUILD_URL echo "JOB_URL" :: $JOB_URL</command>
+            <configuredLocalRules/>
+        </hudson.tasks.Shell>
+    </builders>
+    <publishers/>
+    <buildWrappers/>
+</project>

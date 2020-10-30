@@ -13,10 +13,21 @@ SCRIPT=$(readlink -f "$0")
 # Absolute path this script is in, thus /home/user/bin
 SCRIPTPATH=$(dirname "$SCRIPT")
 
-####################### UCD server data
+####################### Jenkins server data
 
-wget --http-user=admin --http-password=admin --auth-no-challenge \
-     --header="Accept: application/json" \
-     --header="Content-type: application/json" \
-     --post-file=$SCRIPTPATH/data/server-configs.json \
-    http://localhost:5516/repository/cis -O /dev/null
+curl --user admin:admin -i -X POST http://localhost:15516/api/v1/config \
+  -H "Content-Type: application/json" -H "Accept: application/json" \
+  --data "@"$SCRIPTPATH"/data/server-config.json"
+
+SERVER="http://localhost:9080"
+COOKIEJAR="$(mktemp)"
+CRUMB=$(curl -u "admin:admin" --cookie-jar "$COOKIEJAR" "$SERVER/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,%22:%22,//crumb)")
+curl -s -X POST -u "admin:admin" --cookie "$COOKIEJAR"  -H "$CRUMB" -H "Content-Type:text/xml" --data "@"$SCRIPTPATH"/data/config.xml" "$SERVER"/createItem?name=myBuild
+curl -X POST -u "admin:admin" --cookie "$COOKIEJAR" -H "$CRUMB" "$SERVER"/job/myBuild/buildWithParameters
+
+
+########### LOAD XLR TEMPLATE
+
+curl --user admin:admin -i -X POST http://localhost:15516/api/v1/templates/import \
+    -H "Content-Type: application/json" -H "Accept: application/json" \
+    --data "@"$SCRIPTPATH"/data/release-template.json"

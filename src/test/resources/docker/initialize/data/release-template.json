@@ -1,0 +1,192 @@
+[{
+    "id": "Applications/Release20e92046a46648288818fcc1dd61cabe",
+    "type": "xlrelease.Release",
+    "title": "JenkinsTest",
+    "scheduledStartDate": "2020-10-27T14:00:00Z",
+    "flagStatus": "OK",
+    "overdueNotified": false,
+    "maxConcurrentReleases": 100,
+    "releaseTriggers": [],
+    "teams": [
+      {
+        "id": "Applications/Release20e92046a46648288818fcc1dd61cabe/Team7c995701eb6445b393083e587316cde9",
+        "type": "xlrelease.Team",
+        "teamName": "Template Owner",
+        "members": [
+          "admin"
+        ],
+        "roles": [],
+        "permissions": [
+          "template#edit",
+          "template#lock_task",
+          "template#view",
+          "template#edit_triggers",
+          "template#edit_precondition",
+          "template#edit_security",
+          "template#create_release",
+          "template#edit_failure_handler"
+        ]
+      },
+      {
+        "id": "Applications/Release20e92046a46648288818fcc1dd61cabe/Team5a7dc8746dfb430a83fe34ba6b787238",
+        "type": "xlrelease.Team",
+        "teamName": "Release Admin",
+        "members": [],
+        "roles": [],
+        "permissions": [
+          "release#edit_precondition",
+          "release#edit",
+          "release#task_transition",
+          "release#edit_task_attachments",
+          "trigger#view_trigger",
+          "release#reassign_task",
+          "release#edit_task_input_output_properties",
+          "release#edit_task_tags",
+          "release#edit_security",
+          "release#edit_task_description",
+          "trigger#edit_trigger",
+          "release#view",
+          "release#lock_task",
+          "release#start",
+          "release#edit_blackout",
+          "template#view",
+          "release#edit_failure_handler",
+          "release#abort",
+          "release#edit_task_script",
+          "release#edit_task_configuration_facet",
+          "release#edit_task_flag",
+          "release#edit_task_dates",
+          "release#edit_task"
+        ]
+      }
+    ],
+    "memberViewers": [],
+    "roleViewers": [],
+    "attachments": [],
+    "phases": [
+      {
+        "id": "Applications/Release20e92046a46648288818fcc1dd61cabe/Phase37c3930e318341fa900328a8fe4f001c",
+        "type": "xlrelease.Phase",
+        "title": "New Phase",
+        "flagStatus": "OK",
+        "overdueNotified": false,
+        "tasks": [
+          {
+            "id": "Applications/Release20e92046a46648288818fcc1dd61cabe/Phase37c3930e318341fa900328a8fe4f001c/Taskf96b048e77ae48bcbbd123f359bdae7e",
+            "type": "xlrelease.CustomScriptTask",
+            "title": "Get Parameters",
+            "flagStatus": "OK",
+            "overdueNotified": false,
+            "comments": [],
+            "container": "Applications/Release20e92046a46648288818fcc1dd61cabe/Phase37c3930e318341fa900328a8fe4f001c",
+            "facets": [],
+            "attachments": [],
+            "status": "PLANNED",
+            "watchers": [],
+            "waitForScheduledStartDate": true,
+            "delayDuringBlackout": false,
+            "postponedDueToBlackout": false,
+            "hasBeenFlagged": false,
+            "hasBeenDelayed": false,
+            "taskFailureHandlerEnabled": false,
+            "failuresCount": 0,
+            "variableMapping": {
+              "pythonScript.jobParameters": "${jenkinsParams}"
+            },
+            "externalVariableMapping": {},
+            "tags": [],
+            "dueSoonNotified": false,
+            "locked": false,
+            "checkAttributes": false,
+            "pythonScript": {
+              "id": "Applications/Release20e92046a46648288818fcc1dd61cabe/Phase37c3930e318341fa900328a8fe4f001c/Taskf96b048e77ae48bcbbd123f359bdae7e/PythonScript",
+              "type": "jenkins.GetBuildParameters",
+              "customScriptTask": "Applications/Release20e92046a46648288818fcc1dd61cabe/Phase37c3930e318341fa900328a8fe4f001c/Taskf96b048e77ae48bcbbd123f359bdae7e",
+              "server": "Configuration/Custom/localhost",
+              "jobName": "myBuild",
+              "buildNumber": "1",
+              "jobParameters": {}
+            },
+            "keepPreviousOutputPropertiesOnRetry": false
+          },
+          {
+            "id": "Applications/Release20e92046a46648288818fcc1dd61cabe/Phase37c3930e318341fa900328a8fe4f001c/Taske3d30e8afd9f4489bb1e13326ad57853",
+            "type": "xlrelease.CustomScriptTask",
+            "title": "Get Env Vars",
+            "flagStatus": "OK",
+            "overdueNotified": false,
+            "comments": [],
+            "container": "Applications/Release20e92046a46648288818fcc1dd61cabe/Phase37c3930e318341fa900328a8fe4f001c",
+            "facets": [],
+            "attachments": [],
+            "status": "PLANNED",
+            "watchers": [],
+            "waitForScheduledStartDate": true,
+            "delayDuringBlackout": false,
+            "postponedDueToBlackout": false,
+            "hasBeenFlagged": false,
+            "hasBeenDelayed": false,
+            "taskFailureHandlerEnabled": false,
+            "failuresCount": 0,
+            "variableMapping": {
+              "pythonScript.jobEnvVars": "${jenkinsEnvVars}"
+            },
+            "externalVariableMapping": {},
+            "tags": [],
+            "dueSoonNotified": false,
+            "locked": false,
+            "checkAttributes": false,
+            "pythonScript": {
+              "id": "Applications/Release20e92046a46648288818fcc1dd61cabe/Phase37c3930e318341fa900328a8fe4f001c/Taske3d30e8afd9f4489bb1e13326ad57853/PythonScript",
+              "type": "jenkins.GetBuildEnvironmentVariabless",
+              "customScriptTask": "Applications/Release20e92046a46648288818fcc1dd61cabe/Phase37c3930e318341fa900328a8fe4f001c/Taske3d30e8afd9f4489bb1e13326ad57853",
+              "server": "Configuration/Custom/localhost",
+              "jobName": "myBuild",
+              "buildNumber": "1",
+              "jobEnvVars": {}
+            },
+            "keepPreviousOutputPropertiesOnRetry": false
+          }
+        ],
+        "release": "Applications/Release20e92046a46648288818fcc1dd61cabe",
+        "status": "PLANNED"
+      }
+    ],
+    "queryableStartDate": "2020-10-27T14:00:00Z",
+    "realFlagStatus": "OK",
+    "status": "TEMPLATE",
+    "tags": [],
+    "variables": [
+      {
+        "id": "Applications/Release20e92046a46648288818fcc1dd61cabe/Variable23e0a1b07cf04e42a94c350a92f251bb",
+        "type": "xlrelease.MapStringStringVariable",
+        "key": "jenkinsEnvVars",
+        "requiresValue": false,
+        "showOnReleaseStart": false,
+        "inherited": false,
+        "value": {}
+      },
+      {
+        "id": "Applications/Release20e92046a46648288818fcc1dd61cabe/Variablee8b5f3a860b44943b1824395b226dc4a",
+        "type": "xlrelease.MapStringStringVariable",
+        "key": "jenkinsParams",
+        "requiresValue": false,
+        "showOnReleaseStart": false,
+        "inherited": false,
+        "value": {}
+      }
+    ],
+    "calendarPublished": false,
+    "tutorial": false,
+    "abortOnFailure": false,
+    "allowPasswordsInAllFields": false,
+    "allowConcurrentReleasesFromTrigger": true,
+    "runningTriggeredReleasesCount": 0,
+    "createdFromTrigger": false,
+    "extensions": [],
+    "autoStart": false,
+    "automatedResumeCount": 0,
+    "riskProfile": "Configuration/riskProfiles/Default risk profile",
+    "riskScore": "000",
+    "totalRiskScore": "0000"
+  }]
