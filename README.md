@@ -19,6 +19,15 @@ This plugin offers an interface from XL Release to Jenkins 2.x.
 [xlr-jenkins2-plugin-license-url]: https://opensource.org/licenses/MIT
 [xlr-jenkins2-plugin-downloads-image]: https://img.shields.io/github/downloads/xebialabs-community/xlr-jenkins2-plugin/total.svg
 
+## Preface
+
+This document describes the functionality provided by the XL Release xlr-jenkins2-trigger-api.
+
+See the [XL Release reference manual](https://docs.xebialabs.com/xl-release) for background information on XL Release and release automation concepts.
+
+This is a 'See It Work' plugin project, meaning the code base includes functionality that makes it easy to spin up and configure a dockerized version of the XebiaLabs platform with this plugin already installed. Using the provided test data, you can then try out the plugin features. This is useful for familiarizing yourself with the plugin functionality, for demonstrations, for testing and for further plugin development. Currently the Demo Data is configured to demonstrate the tasks Get Parameters and Get Environment Variables only.
+
+[See the Demo/Dev section.](#developmentdemo)
 
 ## Usage
 
@@ -51,19 +60,50 @@ This tile breaks down the build time for recent jobs, down to the level of build
 
 **The [Pipeline Stage View Jenkins Plugin](https://github.com/jenkinsci/pipeline-stage-view-plugin) must be installed in Jenkins, before using this dashboard tile.**
 
-### Tasks
+## Tasks
 
-* Jenkins.GetBuildParameters tasks allows to fetch the parameters from an executed job.
+### Jenkins.GetBuildParameters tasks allows to fetch the parameters from an executed job.
 
 ![Jenkins GetBuildParameters](images/jenkins_get_parameters.png) 
 
-## Testing and Development
-If you want to start this plugin, you could use the following command `./gradlew runDockerCompose`. 
-This will give you 2 containers (Jenkins and XL Release), with the plugin preloaded.
+### Jenkins.GetEnvironmentVariables task fetchs the environment variables from an executed job.
+  
+  **NOTE: You must have the [Jenkins plugin ‘Environment Injector’](https://plugins.jenkins.io/envinject/) id=envinject installed prior to executing the Jenkins job**
 
-* How to retrieve the admin password for jenkins? 
+![JenkinsPluginInstall](images/JenkinsPluginInstall.png)
 
-`docker exec -it docker_jenkins_1 cat /var/jenkins_home/secrets/initialAdminPassword` 
+![Jenkins GetEnvironmentVariables](images/jenkins_get_env_vars.png)
+
+## Development/Demo
+
+Build and package the plugin with...
+
+```bash
+./gradlew clean build
+```
+
+### To run demo or dev testbed -
+
+The following will set up a xlr/jenkins testbed using docker. 
+
+1. Clone this github project to your local dev environment
+2. You will need to have Docker and Docker Compose installed.
+3. You will need to be able to run bash scripts
+4. The XL-Release docker image uses the community trial license
+5. Build the xlr-jenkins2-plugin.jar - Open a terminal and cd into <xlr-jenkins2-plugin code base> and run ./gradlew clean build . Be sure to re-run the command whenever code is changed.
+6. From another terminal, cd into the <xlr-jenkins2-plugin code base>/src/test/resources/docker/  directory.
+7. Then run: docker-compose up 
+8. XL Release will run on the [localhost port 15516](http://localhost:15516/). It may take up to a minute for XL Release to start up
+9. The XL Release username / password is admin / admin
+10. Jenkins will run on the [localhost port 9080](http://localhost:9080/). 
+11. The Jenkins username / password is admin / admin
+12. After XL Release has started, you can set up a template, a shared configuration server in XLR and a test job and build in Jenkins by running the script <xlr-jenkins2-plugin code base>/src/test/resources/docker/initialize/initialize_data.sh.
+13. You can then run a release within XLR using the template named 'jenkingTest'.
+14. When code is modified, re-run the ./gradlew clean build (in the first terminal), then refresh the testbed by running docker-compose down (in a third terminal) followed by docker-compose up (in the second terminal). After XL Release starts up, re-run <xlr-jenkins2-plugin code base>/src/test/resources/docker/initialize/initialize_data.sh.
+
+Further Demo/Dev Notes:
+
+1. The log file for the plugin - plugin.log will be persisted to the local directory <xlr-jenkins2-plugin code base>/build/reports/tests/log directory.
 
 ## Contributing
 
